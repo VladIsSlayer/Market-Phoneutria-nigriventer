@@ -42,6 +42,7 @@ function renderSlide(index) {
     const data = slides[index];
     if (!data) return;
 
+    frame.classList.remove("is-visible");
     frame.innerHTML = `
         <div class="slide-content">
             <h2>${data.title}</h2>
@@ -49,6 +50,7 @@ function renderSlide(index) {
             <div class="style-badge">${data.style.toUpperCase()} · ${data.vibe}</div>
         </div>
     `;
+    requestAnimationFrame(() => frame.classList.add("is-visible"));
 
     counterSpan.innerText = `слайд ${index + 1} / ${slides.length}`;
 
@@ -83,6 +85,19 @@ function buildNavPanel() {
 function init() {
     buildNavPanel();
     renderSlide(currentIndex);
+
+    // Переключение стрелками для более живой навигации.
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight") {
+            currentIndex = (currentIndex + 1) % slides.length;
+            renderSlide(currentIndex);
+        }
+
+        if (event.key === "ArrowLeft") {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            renderSlide(currentIndex);
+        }
+    });
 }
 
 init();
