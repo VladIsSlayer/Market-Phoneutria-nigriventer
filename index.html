@@ -3,52 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoneutria nigriventer</title>
+    <title>NOIR DISTRICT - Магазин одежды</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="page-glow"></div>
-    <div class="slider-container">
-        <header class="slider-header">
-            <p class="slider-kicker">Коллекция образов</p>
-            <h1>Темные эстетики: от Y2K до гранжа</h1>
-        </header>
-
-        <div class="slider-frame" id="sliderFrame">
-
+    <header class="topbar">
+        <div class="brand">
+            <p class="brand-mark">NOIR DISTRICT</p>
+            <h1>Интернет-магазин одежды</h1>
         </div>
+        <button class="cart-fab" id="cartFab" type="button">Корзина <span id="cartCountBadge">0</span></button>
+    </header>
 
-        <div class="action-row">
-            <button class="mix-btn" id="mixBtn" type="button">Авто-сочетание</button>
-        </div>
+    <main class="layout">
+        <aside class="filters-panel">
+            <h2>Каталог</h2>
+            <label class="control-group">
+                <span>Поиск</span>
+                <input id="searchInput" type="text" placeholder="Название товара">
+            </label>
+            <label class="control-group">
+                <span>Категория</span>
+                <select id="categorySelect"></select>
+            </label>
+            <label class="control-group">
+                <span>Стиль</span>
+                <select id="styleSelect"></select>
+            </label>
+            <label class="control-group">
+                <span>Сортировка</span>
+                <select id="sortSelect">
+                    <option value="popular">По популярности</option>
+                    <option value="cheap">Сначала дешевле</option>
+                    <option value="expensive">Сначала дороже</option>
+                    <option value="name">По названию</option>
+                </select>
+            </label>
+        </aside>
 
-        <div class="nav-panel" id="navPanel"></div>
+        <section class="catalog-panel">
+            <section class="store-intro">
+                <p class="intro-kicker">Новая коллекция SS26</p>
+                <h2>Городские образы в темной эстетике</h2>
+                <p>Подбирай готовые сочетания, фильтруй по стилю и собирай свой идеальный лук в пару кликов.</p>
+                <div class="intro-tags">
+                    <span>Бесплатная доставка от 7000 ₽</span>
+                    <span>Обновления каждую неделю</span>
+                    <span>Персональные рекомендации</span>
+                </div>
+            </section>
 
-        <div class="slide-counter" id="slideCounter">
-            Слайд 1 / 5
-        </div>
+            <div class="catalog-header">
+                <h2>Товары</h2>
+                <p id="catalogInfo">Найдено: 0</p>
+            </div>
+            <nav class="style-nav" id="styleNav"></nav>
+            <div class="products-grid" id="productsGrid"></div>
 
-        <section class="recommend-panel" id="recommendPanel">
-            <p class="recommend-empty">Выбери товар и нажми «С чем носить», чтобы увидеть готовые сочетания.</p>
+            <section class="recommend-panel" id="recommendPanel">
+                <p class="recommend-empty">Выбери товар и нажми «Сочетается с», чтобы увидеть подборку.</p>
+            </section>
         </section>
 
-        <section class="cart-panel">
+        <aside class="cart-panel" id="cartPanel">
             <div class="cart-head">
                 <h2>Корзина</h2>
-                <span class="cart-count" id="cartCount">0</span>
+                <button class="close-cart" id="closeCartBtn" type="button">Закрыть</button>
+            </div>
+            <div class="delivery-progress">
+                <p id="deliveryHint">Добавьте товаров для бесплатной доставки</p>
+                <div class="delivery-bar">
+                    <span id="deliveryBarFill"></span>
+                </div>
             </div>
             <div class="cart-items" id="cartItems">
                 <p class="cart-empty">Корзина пуста</p>
             </div>
+            <div class="promo-row">
+                <input id="promoInput" type="text" placeholder="Промокод (NOIR10)">
+                <button id="applyPromoBtn" type="button">Применить</button>
+            </div>
+                <p class="promo-note" id="promoNote">Промокод не применен.</p>
             <div class="cart-total-row">
-                <span>Итого</span>
-                <strong id="cartTotal">0 ₽</strong>
+                <span>Товаров: <strong id="cartCount">0</strong></span>
+                <span>Подитог: <strong id="cartSubtotal">0 ₽</strong></span>
+                <span>Доставка: <strong id="cartDelivery">0 ₽</strong></span>
+                <span>Скидка: <strong id="cartDiscount">0 ₽</strong></span>
+                <span>Итого: <strong id="cartTotal">0 ₽</strong></span>
             </div>
             <button class="checkout-btn" id="checkoutBtn" type="button">Оформить заказ</button>
-        </section>
-    </div>
+        </aside>
+    </main>
 
+    <section class="content-sections">
+        <article class="content-card">
+            <h3>Почему NOIR DISTRICT</h3>
+            <ul>
+                <li>Капсульные коллекции в стиле Y2K, готика, рок, панк и гранж.</li>
+                <li>Каждая вещь сочетается минимум с 3 категориями каталога.</li>
+                <li>Подборки «с чем носить» экономят время при выборе образа.</li>
+            </ul>
+        </article>
+        <article class="content-card">
+            <h3>Доставка и оплата</h3>
+            <ul>
+                <li>Курьер по городу: 1-2 дня.</li>
+                <li>Пункты выдачи: 2-4 дня.</li>
+                <li>Оплата онлайн, картой или при получении.</li>
+            </ul>
+        </article>
+        <article class="content-card">
+            <h3>FAQ</h3>
+            <ul>
+                <li>Обмен и возврат в течение 14 дней.</li>
+                <li>Размерная сетка доступна в карточках товаров.</li>
+                <li>Для консультации пиши в Telegram: @noirdistrict_shop.</li>
+            </ul>
+        </article>
+    </section>
 
-<script src="script.js"></script>
+    <footer class="site-footer">
+        <p>NOIR DISTRICT · Интернет-магазин одежды · 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
