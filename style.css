@@ -1,4 +1,9 @@
 
+/* =========================
+   1) БАЗА: шрифты, reset, переменные темы
+   ========================= */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +19,7 @@
     --accent: #6f5bff;
     --accent-2: #4d7bff;
     --ok: #adffcb;
+    --catalog-columns: 3;
 }
 
 body {
@@ -24,6 +30,7 @@ body {
     padding: 1.1rem;
 }
 
+/* Декоративное свечение фона */
 .page-glow {
     position: fixed;
     right: -110px;
@@ -35,12 +42,45 @@ body {
     pointer-events: none;
 }
 
+/* =========================
+   2) СЛОИ ПОВЕРХ КОНТЕНТА
+   ========================= */
+/* Затемняющий оверлей под окном рекомендаций */
+.recommend-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 7, 13, 0.45);
+    z-index: 35;
+}
+
+.recommend-overlay.open {
+    display: block;
+}
+
+/* =========================
+   3) ОБЩИЕ МЕДИА-ЭЛЕМЕНТЫ
+   ========================= */
+/* Универсальный стиль контентных изображений */
+.content-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  margin-top: 0.65rem;
+  display: block;
+}
+
+/* =========================
+   4) ШАПКА И НАВИГАЦИЯ
+   ========================= */
+/* Верхняя панель сайта */
 .topbar {
     max-width: 1400px;
     margin: 0 auto 1rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.7rem 1rem;
     align-items: center;
     background: rgba(16, 22, 38, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.09);
@@ -52,16 +92,164 @@ body {
     backdrop-filter: blur(8px);
 }
 
+/* Блок бренда в шапке */
+.brand {
+    grid-column: 1 / -1;
+    position: relative;
+    text-align: center;
+    padding-right: 84px;
+}
+
+/* Главное меню между страницами */
+.site-menu {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.site-menu a {
+    text-decoration: none;
+    color: #dce4ff;
+    font-size: 0.78rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 0.28rem 0.58rem;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.site-menu a.active {
+    background: linear-gradient(130deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+}
+
+/* Быстрые ссылки под hero-блоком */
+.quick-nav {
+    max-width: 1400px;
+    margin: 0 auto 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+}
+
+.quick-nav a {
+    text-decoration: none;
+    color: #dae2ff;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0.3rem 0.62rem;
+    background: rgba(16, 22, 38, 0.75);
+}
+
+.quick-nav a:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Текстовая метка бренда */
 .brand-mark {
-    color: #acb8da;
-    letter-spacing: 0.16em;
-    font-size: 0.7rem;
+    color: #c4cdef;
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Исторический placeholder под логотип */
+.logo-placeholder {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d6e0ff;
+    font-size: 0.68rem;
+    position: absolute;
+    right: 8px;
+    top: 2px;
+    margin-bottom: 0;
+}
+
+/* Реальный логотип в шапке/hero */
+.hero-logo {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+}
+
+/* Мини-логотип для некоторых макетов */
+.logo-mini {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  position: absolute;
+  right: 8px;
+  top: 2px;
 }
 
 .brand h1 {
-    font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+    font-size: clamp(0.95rem, 2.1vw, 1.2rem);
+    margin-top: 0.15rem;
 }
 
+.brand-slogan {
+    margin-top: 0.22rem;
+    color: #b8c4ea;
+    font-size: 0.79rem;
+}
+
+/* =========================
+   5) HERO-СЕКЦИЯ БРЕНДА
+   ========================= */
+.brand-hero {
+    max-width: 1400px;
+    margin: 0 auto 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    background: linear-gradient(140deg, rgba(14, 21, 38, 0.96), rgba(10, 15, 30, 0.96));
+    padding: 0.95rem 1rem 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.brand-hero-title {
+    font-family: "Cinzel", "Times New Roman", serif;
+    font-size: clamp(2rem, 5.5vw, 3.8rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #eef3ff;
+    line-height: 1.08;
+}
+
+.brand-hero-subtitle {
+    margin-top: 0.35rem;
+    color: #bfcaf1;
+    font-size: 0.88rem;
+}
+
+/* Исторический placeholder (если временно нет логотипа) */
+.hero-logo-placeholder {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    width: 74px;
+    height: 74px;
+    border-radius: 16px;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d6e0ff;
+    font-size: 0.72rem;
+}
+
+/* Кнопка быстрого открытия корзины */
 .cart-fab {
     border: none;
     border-radius: 10px;
@@ -72,6 +260,9 @@ body {
     cursor: pointer;
 }
 
+/* =========================
+   6) ГЛАВНАЯ СЕТКА СТРАНИЦЫ
+   ========================= */
 .layout {
     max-width: 1400px;
     margin: 0 auto;
@@ -81,6 +272,7 @@ body {
     align-items: start;
 }
 
+/* Базовый стиль панелей layout */
 .filters-panel,
 .catalog-panel,
 .cart-panel {
@@ -90,6 +282,7 @@ body {
     padding: 0.95rem;
 }
 
+/* Левая колонка фильтров фиксируется на desktop */
 .filters-panel {
     position: sticky;
     top: 5.7rem;
@@ -101,6 +294,9 @@ body {
     font-size: 1.02rem;
 }
 
+/* =========================
+   7) ПРОМО-БЛОК НАД КАТАЛОГОМ
+   ========================= */
 .store-intro {
     background: linear-gradient(130deg, rgba(111, 91, 255, 0.2), rgba(77, 123, 255, 0.08));
     border: 1px solid rgba(159, 173, 255, 0.35);
@@ -143,6 +339,39 @@ body {
     background: rgba(255, 255, 255, 0.06);
 }
 
+/* =========================
+   8) МЕТРИКИ И СТАТИСТИКА
+   ========================= */
+.stats-row {
+    margin-top: 0.56rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+
+.stat-item {
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 10px;
+    padding: 0.45rem;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-item span {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #f0f4ff;
+}
+
+.stat-item p {
+    margin-top: 0.16rem;
+    font-size: 0.72rem;
+    color: #c7d1f3;
+}
+
+/* =========================
+   9) ФИЛЬТРЫ КАТАЛОГА
+   ========================= */
 .control-group {
     display: flex;
     flex-direction: column;
@@ -164,6 +393,9 @@ body {
     padding: 0.55rem 0.6rem;
 }
 
+/* =========================
+   10) ЗАГОЛОВОК КАТАЛОГА И ЧИПЫ СТИЛЕЙ
+   ========================= */
 .catalog-header {
     display: flex;
     align-items: baseline;
@@ -205,14 +437,73 @@ body {
     color: #fff;
 }
 
+/* =========================
+   11) СЕТКА ТОВАРОВ И ПАГИНАЦИЯ
+   ========================= */
 .products-grid {
     margin-top: 0.8rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+    grid-template-columns: repeat(var(--catalog-columns), minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: 0.7rem;
 }
 
+.pagination {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.page-btn {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: #d5def9;
+    border-radius: 8px;
+    padding: 0.36rem 0.62rem;
+    font-size: 0.76rem;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background: linear-gradient(130deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+}
+
+.placeholder-card {
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Дублирующий блок пагинации сохранен без изменений по исходнику */
+.pagination {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.page-btn {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: #d5def9;
+    border-radius: 8px;
+    padding: 0.36rem 0.62rem;
+    font-size: 0.76rem;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background: linear-gradient(130deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+}
+
+/* =========================
+   12) КАРТОЧКИ ТОВАРОВ
+   ========================= */
 .product-card {
     background: var(--bg-soft);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -318,6 +609,9 @@ body {
     cursor: pointer;
 }
 
+/* =========================
+   13) ПАНЕЛЬ РЕКОМЕНДАЦИЙ
+   ========================= */
 .recommend-panel {
     margin-top: 0.95rem;
     background: rgba(255, 255, 255, 0.03);
@@ -349,6 +643,8 @@ body {
     align-items: flex-start;
     gap: 0.7rem;
     margin-bottom: 0.3rem;
+    cursor: move;
+    user-select: none;
 }
 
 .recommend-head p {
@@ -395,6 +691,9 @@ body {
     line-height: 1.2;
 }
 
+/* =========================
+   14) КОРЗИНА И ОФОРМЛЕНИЕ
+   ========================= */
 .cart-head {
     display: flex;
     justify-content: space-between;
@@ -537,6 +836,9 @@ body {
     font-size: 0.74rem;
 }
 
+/* =========================
+   15) ПУСТЫЕ СОСТОЯНИЯ И КОНТЕНТНЫЕ СЕКЦИИ
+   ========================= */
 .empty-state {
     color: var(--text-muted);
 }
@@ -568,6 +870,66 @@ body {
     line-height: 1.5;
 }
 
+.content-card a {
+    color: #bdd0ff;
+    text-decoration: none;
+}
+
+.content-card a:hover {
+    text-decoration: underline;
+}
+
+.content-list {
+    margin-top: 0.55rem;
+    padding-left: 1.2rem;
+    color: #c6d0ef;
+    line-height: 1.6;
+}
+
+.chart-caption {
+    color: #c6d0ef;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+
+#categoryChart {
+    width: 100%;
+    height: 230px !important;
+}
+
+#stylesChart {
+    width: 100%;
+    height: 230px !important;
+}
+
+#cityChart {
+    width: 100%;
+    height: 230px !important;
+}
+
+.image-placeholder {
+    margin-top: 0.65rem;
+    height: 220px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.28);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b6c2e9;
+    font-size: 0.82rem;
+    text-align: center;
+    padding: 0.6rem;
+}
+
+.two-col {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+/* Подвал сайта */
 .site-footer {
     max-width: 1400px;
     margin: 0.8rem auto 0;
@@ -577,6 +939,9 @@ body {
     padding-bottom: 0.8rem;
 }
 
+/* =========================
+   16) АДАПТИВ: планшеты и небольшие ноутбуки
+   ========================= */
 @media (max-width: 1150px) {
     .layout {
         grid-template-columns: 250px minmax(0, 1fr);
@@ -607,18 +972,50 @@ body {
     }
 }
 
+/* =========================
+   17) АДАПТИВ: мобильные устройства
+   ========================= */
 @media (max-width: 760px) {
     .topbar {
-        flex-direction: column;
-        align-items: flex-start;
+        grid-template-columns: 1fr;
+    }
+
+    .site-menu {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .brand {
+        padding-right: 0;
+    }
+
+    .logo-placeholder {
+        position: static;
+        margin: 0 auto 0.3rem;
+    }
+
+    .hero-logo-placeholder {
+        position: static;
+        margin: 0.45rem auto 0;
+    }
+
+    .hero-logo,
+    .logo-mini {
+        position: static;
+        margin: 0 auto 0.3rem;
+        display: block;
     }
 
     .layout {
         grid-template-columns: 1fr;
     }
 
+    .quick-nav {
+        margin-bottom: 0.6rem;
+    }
+
     .products-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        --catalog-columns: 2;
     }
 
     .product-card {
@@ -633,6 +1030,10 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
     .recommend-panel {
         left: 12px !important;
         right: 12px;
@@ -641,8 +1042,15 @@ body {
         width: calc(100vw - 24px);
         max-height: min(68vh, 520px);
     }
+
+    .recommend-head {
+        cursor: default;
+    }
 }
 
+/* =========================
+   18) АДАПТИВ: очень узкие экраны
+   ========================= */
 @media (max-width: 480px) {
     body {
         padding: 0.65rem;
@@ -651,6 +1059,7 @@ body {
     .products-grid,
     .recommend-grid {
         grid-template-columns: 1fr;
+        --catalog-columns: 1;
     }
 
     .product-card {
@@ -659,5 +1068,9 @@ body {
 
     .product-image-wrap {
         height: 190px;
+    }
+
+    .two-col {
+        grid-template-columns: 1fr;
     }
 }
