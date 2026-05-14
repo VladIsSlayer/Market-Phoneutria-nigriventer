@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoneutria nigriventer - CMS</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="page-glow"></div>
+    <header class="topbar">
+        <div class="topbar-main">
+            <nav class="site-menu" aria-label="Основная навигация">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О проекте</a>
+                <a href="delivery.html">Доставка</a>
+                <a href="faq.html">FAQ</a>
+                <a class="active" href="admin.html">CMS</a>
+            </nav>
+        </div>
+    </header>
+    <section class="brand-hero">
+        <h1 class="sr-only">CMS товаров — Phoneutria nigriventer</h1>
+        <a class="brand-hero-logo-link" href="index.html"><img class="brand-hero-logo" src="../images/Logo.png" alt=""></a>
+        <p class="brand-hero-slogan">Каталог в браузере: добавление, правка и сброс данных</p>
+    </section>
+
+    <main class="layout cms-layout">
+        <section class="catalog-panel">
+            <h2>Форма товара</h2>
+            <p class="chart-caption">ID формируется автоматически по категории. Стиль выбирается из списка.</p>
+            <form id="cmsForm" class="cms-form">
+                <label class="control-group">
+                    <span>ID (авто)</span>
+                    <input id="cmsId" type="text" placeholder="Сгенерируется автоматически" readonly>
+                </label>
+                <label class="control-group">
+                    <span>Название</span>
+                    <input id="cmsName" type="text" placeholder="Название товара" required>
+                </label>
+                <label class="control-group">
+                    <span>Категория</span>
+                    <select id="cmsCategory" required>
+                        <option value="top">Верх</option>
+                        <option value="bottom">Низ</option>
+                        <option value="shoes">Обувь</option>
+                        <option value="outerwear">Верхняя одежда</option>
+                        <option value="accessory">Аксессуары</option>
+                    </select>
+                </label>
+                <label class="control-group">
+                    <span>Путь к изображению</span>
+                    <input id="cmsImage" type="text" placeholder="../images/t-shirt1.png" required>
+                </label>
+                <label class="control-group">
+                    <span>Цена</span>
+                    <input id="cmsPrice" type="number" min="1" step="1" required>
+                </label>
+                <fieldset class="control-group cms-styles-group">
+                    <span>Стили (можно выбрать несколько)</span>
+                    <label><input type="checkbox" class="cms-style-checkbox" value="y2k"> Y2K</label>
+                    <label><input type="checkbox" class="cms-style-checkbox" value="gothic"> Готика</label>
+                    <label><input type="checkbox" class="cms-style-checkbox" value="rock"> Рок</label>
+                    <label><input type="checkbox" class="cms-style-checkbox" value="punk"> Панк</label>
+                    <label><input type="checkbox" class="cms-style-checkbox" value="grunge"> Гранж</label>
+                </fieldset>
+                <p class="chart-caption">Рейтинг = 4.5, масштаб = 0.88, смещение = 0% (задаются автоматически).</p>
+
+                <div class="cms-actions">
+                    <button class="card-btn" type="submit">Сохранить товар</button>
+                    <button class="link-btn" type="button" id="cmsClearBtn">Очистить форму</button>
+                    <button class="link-btn" type="button" id="cmsResetBtn">Сбросить к базовому каталогу</button>
+                </div>
+            </form>
+            <p id="cmsStatus" class="promo-note">Готово к работе.</p>
+        </section>
+
+        <section class="catalog-panel">
+            <h2>Текущий каталог</h2>
+            <p class="chart-caption">Кнопка "Редактировать" заполнит форму, "Удалить" удалит товар.</p>
+            <div id="cmsTableWrap" class="cms-table-wrap"></div>
+        </section>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../admin.js"></script>
+</body>
+</html>

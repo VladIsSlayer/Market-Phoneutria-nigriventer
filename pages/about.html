@@ -5,36 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phoneutria nigriventer - О проекте</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- Декоративный фоновый слой -->
     <div class="page-glow"></div>
     <!-- Общая шапка сайта -->
     <header class="topbar">
-        <div class="brand">
-            <img class="hero-logo" src="images/Logo.png" alt="Логотип Phoneutria nigriventer">
-            <p class="brand-mark">Бренд магазина</p>
-            <h1>О проекте</h1>
-            <p class="brand-slogan">Как странствующий паук, мы всегда в движении.</p>
+        <div class="topbar-main">
+            <nav class="site-menu" aria-label="Основная навигация">
+                <a href="index.html">Главная</a>
+                <a class="active" href="about.html">О проекте</a>
+                <a href="delivery.html">Доставка</a>
+                <a href="faq.html">FAQ</a>
+                <a href="admin.html">CMS</a>
+            </nav>
         </div>
-        <nav class="site-menu">
-            <a href="index.html">Главная</a>
-            <a class="active" href="about.html">О проекте</a>
-            <a href="delivery.html">Доставка</a>
-            <a href="faq.html">FAQ</a>
-        </nav>
     </header>
-    <!-- Брендовый hero-блок -->
-    <section class="brand-hero">
-        <img class="hero-logo" src="images/Logo.png" alt="Логотип Phoneutria nigriventer">
-        <h2 class="brand-hero-title">Phoneutria nigriventer</h2>
-        <p class="brand-hero-subtitle">Уверенность в одежде для любого темпа жизни</p>
-    </section>
 
     <!-- Контент страницы "О проекте" -->
     <main class="layout" style="grid-template-columns: 1fr;">
         <section class="catalog-panel">
+            <h1 class="sr-only">О проекте — Phoneutria nigriventer</h1>
             <!-- Описание идеи бренда -->
             <h2>Идея бренда</h2>
             <p class="chart-caption">
@@ -42,7 +34,7 @@
                 одежда должна не отвлекать, а давать ощущение уверенности. Phoneutria nigriventer — про стиль,
                 который держит темп жизни и помогает выглядеть собранно в любой критический момент.
             </p>
-            <img class="content-image" src="images/Logo.png" alt="Логотип Phoneutria nigriventer">
+            <img class="content-image" src="../images/Logo.png" alt="Логотип Phoneutria nigriventer">
 
             <!-- Навигационная модель проекта -->
             <h2>Навигационная модель сайта</h2>
@@ -52,8 +44,8 @@
                 <li><strong>О проекте:</strong> описание архитектуры и назначения.</li>
                 <li><strong>Доставка:</strong> условия доставки, оплаты и возврата.</li>
                 <li><strong>FAQ:</strong> ответы на частые вопросы пользователей.</li>
+                <li><strong>CMS:</strong> управление каталогом в браузере (localStorage).</li>
             </ul>
-            <div class="image-placeholder">Заглушка под схему навигационной модели сайта (диаграмма)</div>
 
             <!-- Карточки со слоганами и сценариями использования -->
             <div class="two-col">
@@ -107,14 +99,14 @@
                 </div>
                 <!-- Блок с городами и структурой покупок -->
                 <div class="two-col">
-                    <article class="content-card">
+                    <article class="content-card city-demand-card">
                         <h3>Где чаще покупают</h3>
                         <p class="chart-caption">Статистика по городам: количество и сумма заказов (смоделированные данные)</p>
                         <canvas id="cityChart" width="720" height="230"></canvas>
                     </article>
                     <article class="content-card">
                         <h3>Структура покупок</h3>
-                        <img class="content-image" src="images/MapPrice.png" alt="Карта городов доставки">
+                        <img class="content-image" src="../images/MapPrice.png" alt="Карта городов доставки">
                     </article>
                 </div>
             </article>
@@ -128,7 +120,6 @@
                         <li>Показать интерактивность на JavaScript и библиотеках.</li>
                         <li>Подготовить основу для последующего расширения.</li>
                     </ul>
-                    <div class="image-placeholder">Заглушка: скриншот desktop-версии</div>
                 </article>
                 <article class="content-card">
                     <h3>Технологии</h3>
@@ -137,7 +128,6 @@
                         <li>jQuery / jQuery UI для UI-взаимодействий.</li>
                         <li>Chart.js и CountUp.js для визуализации.</li>
                     </ul>
-                    <div class="image-placeholder">Заглушка: скриншот mobile-версии</div>
                 </article>
             </div>
 
@@ -152,11 +142,12 @@
             </article>
         </section>
     </main>
-    <!-- Подключение библиотек и общего script.js -->
+    <!-- Подключение библиотек и js-модулей (данные + приложение) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="script.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 </html>

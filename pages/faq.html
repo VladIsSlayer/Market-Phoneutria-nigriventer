@@ -5,31 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phoneutria nigriventer - FAQ</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- Декоративный фоновый слой -->
     <div class="page-glow"></div>
     <!-- Общая шапка сайта -->
     <header class="topbar">
-        <div class="brand">
-            <img class="hero-logo" src="images/Logo.png" alt="Логотип Phoneutria nigriventer">
-            <p class="brand-mark">Бренд магазина</p>
-            <h1>FAQ</h1>
-            <p class="brand-slogan">Ответы, которые помогают не тормозить в ритме дня.</p>
+        <div class="topbar-main">
+            <nav class="site-menu" aria-label="Основная навигация">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О проекте</a>
+                <a href="delivery.html">Доставка</a>
+                <a class="active" href="faq.html">FAQ</a>
+                <a href="admin.html">CMS</a>
+            </nav>
         </div>
-        <nav class="site-menu">
-            <a href="index.html">Главная</a>
-            <a href="about.html">О проекте</a>
-            <a href="delivery.html">Доставка</a>
-            <a class="active" href="faq.html">FAQ</a>
-        </nav>
     </header>
-    <!-- Брендовый hero-блок -->
     <section class="brand-hero">
-        <img class="hero-logo" src="images/Logo.png" alt="Логотип Phoneutria nigriventer">
-        <h2 class="brand-hero-title">Phoneutria nigriventer</h2>
-        <p class="brand-hero-subtitle">Частые вопросы о заказах, оплате и подборе</p>
+        <h1 class="sr-only">FAQ — Phoneutria nigriventer</h1>
+        <a class="brand-hero-logo-link" href="index.html"><img class="brand-hero-logo" src="../images/Logo.png" alt=""></a>
+        <p class="brand-hero-slogan">Частые вопросы о заказах, оплате и подборе</p>
     </section>
 
     <!-- Основной контент страницы FAQ -->
@@ -38,11 +34,10 @@
             <!-- Базовый список частых вопросов -->
             <h2>Частые вопросы</h2>
             <ul class="content-list">
-                <li><strong>Как подобрать сочетающиеся товары?</strong> Нажмите кнопку «Сочетается с» в карточке товара.</li>
+                <li><strong>Как подобрать сочетающиеся товары?</strong> Вам поможет наша революционная функция сочетания товаров.</li>
                 <li><strong>Как применить промокод?</strong> Введите код в поле корзины и нажмите «Применить».</li>
-                <li><strong>Сохраняется ли корзина?</strong> Да, данные сохраняются в localStorage браузера.</li>
+                <li><strong>Остались вопросы?</strong> Мы всегда рады ответить на них в наших социальных сетях!</li>
             </ul>
-            <div class="image-placeholder">Заглушка: иллюстрация клиентской поддержки / FAQ-блок</div>
 
             <!-- Дополнительные тематические секции -->
             <div class="two-col">
@@ -69,8 +64,8 @@
                 <h3>Технические вопросы</h3>
                 <ul class="content-list">
                     <li>Если фильтры не обновляются — обновите страницу.</li>
-                    <li>Если корзина не сохраняется — проверьте localStorage в браузере.</li>
-                    <li>Если не работает график — проверьте подключение CDN библиотек.</li>
+                    <li>Если корзина не сохраняется — проверьте интернет соединение.</li>
+                    <li>Если не работают графики — обновите страницу или напишите в поддержку.</li>
                 </ul>
             </article>
         </section>

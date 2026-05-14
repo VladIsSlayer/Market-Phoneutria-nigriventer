@@ -1,44 +1,8 @@
-// Справочник стилей для фильтров, чипов и алгоритма рекомендаций.
-const styles = [
-    { id: "y2k", label: "Y2K" },
-    { id: "gothic", label: "Готика" },
-    { id: "rock", label: "Рок" },
-    { id: "punk", label: "Панк" },
-    { id: "grunge", label: "Гранж" }
-];
+﻿const styles = window.NOIR_STYLES;
+const categories = window.NOIR_CATEGORIES;
+const BASE_PRODUCTS = window.NOIR_BASE_PRODUCTS;
+const PRODUCTS_STORAGE_KEY = window.NOIR_PRODUCTS_STORAGE_KEY;
 
-// Справочник категорий товаров.
-const categories = [
-    { id: "top", label: "Верх" },
-    { id: "bottom", label: "Низ" },
-    { id: "shoes", label: "Обувь" },
-    { id: "outerwear", label: "Верхняя одежда" },
-    { id: "accessory", label: "Аксессуары" }
-];
-
-// Каталог товаров (локальные данные без backend).
-const products = [
-    { id: "tshirt-1", name: "Футболка Паучье логово", category: "top", image: "images/t-shirt1.png", price: 1499, styles: ["punk", "grunge"], rating: 4.6, imageScale: 0.84, imageOffsetY: "0%" },
-    { id: "tshirt-2", name: "Футболка Белая клетка чувств", category: "top", image: "images/t-shirt2.png", price: 1499, styles: ["rock", "grunge", "punk"], rating: 4.8, imageScale: 0.87, imageOffsetY: "0%" },
-    { id: "tshirt-3", name: "Футболка Морской подарок", category: "top", image: "images/t-shirt3.png", price: 1290, styles: ["y2k", "rock"], rating: 4.7, imageScale: 0.86, imageOffsetY: "0%" },
-    { id: "tshirt-4", name: "Футболка Морской пустяк", category: "top", image: "images/t-shirt4.png", price: 1290, styles: ["y2k", "punk"], rating: 4.5, imageScale: 0.84, imageOffsetY: "0%" },
-    { id: "tshirt-5", name: "Футболка Бездомный поэт", category: "top", image: "images/t-shirt5.png", price: 990, styles: ["y2k", "punk"], rating: 4.6, imageScale: 0.85, imageOffsetY: "0%" },
-    { id: "pants-1", name: "Джинсы Облоко", category: "bottom", image: "images/pants1.png", price: 3890, styles: ["grunge", "punk"], rating: 4.7, imageScale: 0.83, imageOffsetY: "1%" },
-    { id: "pants-2", name: "Джинсы Офисный стиляга", category: "bottom", image: "images/pants2.png", price: 3590, styles: ["y2k", "grunge", "gothic"], rating: 4.9, imageScale: 0.84, imageOffsetY: "1%" },
-    { id: "pants-3", name: "Джинсы Классика 80-х", category: "bottom", image: "images/pants3.png", price: 3290, styles: ["y2k", "punk"], rating: 4.5, imageScale: 0.84, imageOffsetY: "1%" },
-    { id: "shoes-1", name: "Берцы Переговорщика", category: "shoes", image: "images/shoes1.png", price: 3790, styles: ["rock", "grunge", "punk"], rating: 4.4, imageScale: 0.9, imageOffsetY: "4%" },
-    { id: "shoes-2", name: "Берцы Повседневный путь", category: "shoes", image: "images/shoes2.png", price: 2990, styles: ["rock", "y2k"], rating: 4.8, imageScale: 0.9, imageOffsetY: "4%" },
-    { id: "shoes-3", name: "Берцы Классика двора", category: "shoes", image: "images/shoes3.png", price: 3190, styles: ["rock", "grunge", "punk"], rating: 4.6, imageScale: 0.9, imageOffsetY: "4%" },
-    { id: "shoes-4", name: "Кеды Свободный дух", category: "shoes", image: "images/shoes4.png", price: 2490, styles: ["y2k", "rock", "grunge"], rating: 4.7, imageScale: 0.91, imageOffsetY: "4%" },
-    { id: "shoes-5", name: "Кеды Такой, какой есть", category: "shoes", image: "images/shoes5.png", price: 2490, styles: ["y2k", "gothic", "punk"], rating: 4.5, imageScale: 0.9, imageOffsetY: "4%" },
-    { id: "jacket-1", name: "Ветровка Гонщик", category: "outerwear", image: "images/jacket1.png", price: 3990, styles: ["rock", "y2k", "grunge"], rating: 4.9, imageScale: 0.8, imageOffsetY: "-1%" },
-    { id: "jacket-2", name: "Косуха Наследство пятиэтажек", category: "outerwear", image: "images/jacket2.png", price: 3990, styles: ["rock", "punk", "grunge"], rating: 4.7, imageScale: 0.8, imageOffsetY: "-1%" },
-    { id: "cap-1", name: "Кепка Зомби майор", category: "accessory", image: "images/cap1.png", price: 990, styles: ["y2k", "grunge"], rating: 4.3, imageScale: 0.92, imageOffsetY: "0%" },
-    { id: "cap-2", name: "Берет Карьеристки", category: "accessory", image: "images/cap2.png", price: 990, styles: ["punk", "rock", "grunge"], rating: 4.4, imageScale: 0.92, imageOffsetY: "0%" },
-    { id: "cap-3", name: "Кепка Душа компании", category: "accessory", image: "images/cap3.png", price: 990, styles: ["y2k", "punk"], rating: 4.4, imageScale: 0.92, imageOffsetY: "0%" },
-    { id: "hat-1", name: "Шапка Забота мамы", category: "accessory", image: "images/hat1.png", price: 2590, styles: ["y2k", "gothic", "rock"], rating: 4.6, imageScale: 0.9, imageOffsetY: "0%" },
-    { id: "hat-2", name: "Шапка Ушанка Сибирь", category: "accessory", image: "images/hat2.png", price: 2490, styles: ["gothic", "grunge", "punk"], rating: 4.5, imageScale: 0.9, imageOffsetY: "0%" }
-];
 
 // Кэшируем ссылки на элементы интерфейса один раз при старте.
 const searchInput = document.getElementById("searchInput");
@@ -92,6 +56,57 @@ let stylesChart = null;
 let cityChart = null;
 let currentPage = 1;
 let lastCatalogColumns = getCatalogColumns();
+let products = loadProductsForStore();
+
+function safeJsonParse(raw) {
+    try {
+        return JSON.parse(raw);
+    } catch (error) {
+        return null;
+    }
+}
+
+function normalizeProduct(raw) {
+    if (!raw || typeof raw !== "object") return null;
+    const id = String(raw.id || "").trim();
+    const name = String(raw.name || "").trim();
+    const category = String(raw.category || "").trim();
+    const image = String(raw.image || "").trim();
+    const price = Number(raw.price);
+    const rating = Number(raw.rating);
+    if (!id || !name || !category || !image) return null;
+    if (!categories.some((item) => item.id === category)) return null;
+    if (!Number.isFinite(price) || price <= 0) return null;
+    if (!Number.isFinite(rating) || rating < 0 || rating > 5) return null;
+
+    const styleList = Array.isArray(raw.styles)
+        ? raw.styles.map((item) => String(item).trim()).filter(Boolean)
+        : [];
+    const validStyles = styleList.filter((styleId) => styles.some((style) => style.id === styleId));
+    if (!validStyles.length) return null;
+
+    const imageScale = Number(raw.imageScale);
+    const imageOffsetY = typeof raw.imageOffsetY === "string" ? raw.imageOffsetY : "0%";
+    return {
+        id,
+        name,
+        category,
+        image,
+        price: Math.round(price),
+        styles: [...new Set(validStyles)],
+        rating: Math.round(rating * 10) / 10,
+        imageScale: Number.isFinite(imageScale) ? imageScale : 0.88,
+        imageOffsetY
+    };
+}
+
+function loadProductsForStore() {
+    const stored = safeJsonParse(localStorage.getItem(PRODUCTS_STORAGE_KEY) || "");
+    if (!Array.isArray(stored)) return BASE_PRODUCTS.slice();
+    const normalized = stored.map(normalizeProduct).filter(Boolean);
+    if (!normalized.length) return BASE_PRODUCTS.slice();
+    return normalized;
+}
 
 // Форматирует число как цену в рублях.
 function formatPrice(value) {
@@ -111,20 +126,20 @@ function saveCartState() {
 function restoreCartState() {
     const raw = localStorage.getItem("noir-cart");
     if (!raw) return;
-    try {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed.items)) {
-            parsed.items.forEach((row) => {
-                const product = findById(row.productId);
-                if (!product || !Number.isFinite(row.qty) || row.qty <= 0) return;
-                cart.push({ product, qty: Math.floor(row.qty) });
-            });
-        }
-        if (parsed.activePromo && PROMO_CODES[parsed.activePromo]) {
-            activePromo = parsed.activePromo;
-        }
-    } catch (error) {
+    const parsed = safeJsonParse(raw);
+    if (!parsed || typeof parsed !== "object") {
         localStorage.removeItem("noir-cart");
+        return;
+    }
+    if (Array.isArray(parsed.items)) {
+        parsed.items.forEach((row) => {
+            const product = findById(row.productId);
+            if (!product || !Number.isFinite(row.qty) || row.qty <= 0) return;
+            cart.push({ product, qty: Math.floor(row.qty) });
+        });
+    }
+    if (parsed.activePromo && PROMO_CODES[parsed.activePromo]) {
+        activePromo = parsed.activePromo;
     }
 }
 
@@ -162,21 +177,21 @@ function getFilteredProducts() {
     const style = styleSelect.value;
     const sort = sortSelect.value;
 
-    // Сначала фильтрация.
-    let result = products.filter((item) => {
+    const filtered = products.filter((item) => {
         const bySearch = !search || item.name.toLowerCase().includes(search);
         const byCategory = category === "all" || item.category === category;
         const byStyle = style === "all" || item.styles.includes(style);
         return bySearch && byCategory && byStyle;
     });
 
-    // Затем сортировка.
-    if (sort === "cheap") result.sort((a, b) => a.price - b.price);
-    if (sort === "expensive") result.sort((a, b) => b.price - a.price);
-    if (sort === "name") result.sort((a, b) => a.name.localeCompare(b.name, "ru"));
-    if (sort === "popular") result.sort((a, b) => b.rating - a.rating);
-
-    return result;
+    const sortFns = {
+        cheap: (a, b) => a.price - b.price,
+        expensive: (a, b) => b.price - a.price,
+        name: (a, b) => a.name.localeCompare(b.name, "ru"),
+        popular: (a, b) => b.rating - a.rating
+    };
+    filtered.sort(sortFns[sort] || sortFns.popular);
+    return filtered;
 }
 
 // Основной рендер каталога + заполнение пустых ячеек до ровной сетки.
@@ -274,8 +289,9 @@ const CATEGORY_COMPATIBILITY = {
 };
 
 /*
-  ВАЖНО: этот блок (styles, categories, products) можно безопасно редактировать вручную.
-  Что можно менять:
+  ВАЖНО: справочники и базовый каталог лежат в js/data.js (массив объектов).
+  Здесь — логика витрины; товары подтягиваются из window.NOIR_BASE_PRODUCTS и localStorage.
+  Что можно менять в данных товара:
   - name: название товара;
   - price: цена;
   - styles: массив стилей товара;
@@ -336,8 +352,7 @@ function getMatchesForProduct(product, limit = 4) {
 
 // Позиционирует окно рекомендаций рядом с кнопкой "Сочетается с".
 function positionRecommendPanel(anchorElement) {
-    const panel = recommendPanel;
-    if (!anchorElement) return;
+    if (!anchorElement || !recommendPanel) return;
 
     const anchorRect = anchorElement.getBoundingClientRect();
     const panelWidth = Math.min(460, window.innerWidth - 24);
@@ -358,19 +373,25 @@ function positionRecommendPanel(anchorElement) {
         top = Math.max(12, window.innerHeight - panelHeight - 12);
     }
 
-    panel.style.left = `${left}px`;
-    panel.style.top = `${top}px`;
+    recommendPanel.style.left = `${left}px`;
+    recommendPanel.style.top = `${top}px`;
+}
+
+function setRecommendOverlayOpen(isOpen) {
+    recommendPanel?.classList.toggle("open", isOpen);
+    recommendOverlay?.classList.toggle("open", isOpen);
+}
+
+function showRecommendPanelNearAnchor() {
+    setRecommendOverlayOpen(true);
+    if (window.innerWidth > 860 && recommendationAnchor) {
+        positionRecommendPanel(recommendationAnchor);
+    }
 }
 
 // Закрывает панель рекомендаций и оверлей.
 function hideRecommendations() {
-    if (window.jQuery) {
-        $(recommendPanel).removeClass("open");
-        $(recommendOverlay).removeClass("open");
-    } else {
-        recommendPanel.classList.remove("open");
-        recommendOverlay.classList.remove("open");
-    }
+    setRecommendOverlayOpen(false);
     isRecommendationDragging = false;
 }
 
@@ -390,15 +411,7 @@ function renderRecommendations(productId, anchorElement = null) {
             </div>
             <p class="recommend-empty">Для товара "${product.name}" пока нет подборки.</p>
         `;
-        recommendPanel.classList.add("open");
-        if (window.jQuery) {
-            $(recommendOverlay).addClass("open");
-        } else {
-            recommendOverlay.classList.add("open");
-        }
-        if (window.innerWidth > 860 && recommendationAnchor) {
-            positionRecommendPanel(recommendationAnchor);
-        }
+        showRecommendPanelNearAnchor();
         return;
     }
 
@@ -426,16 +439,27 @@ function renderRecommendations(productId, anchorElement = null) {
                 .join("")}
         </div>
     `;
-    recommendPanel.classList.add("open");
-    if (window.jQuery) {
-        $(recommendOverlay).addClass("open");
-    } else {
-        recommendOverlay.classList.add("open");
-    }
-    if (window.innerWidth > 860 && recommendationAnchor) {
-        positionRecommendPanel(recommendationAnchor);
-    }
+    showRecommendPanelNearAnchor();
 }
+
+function destroyChartIfExists(chart) {
+    if (chart) chart.destroy();
+}
+
+const CHART_GRID = { color: "rgba(255,255,255,0.08)" };
+const CHART_TICK = { color: "#d8e0ff" };
+
+function chartScalesBarDefault() {
+    return {
+        x: { ticks: CHART_TICK, grid: CHART_GRID },
+        y: { beginAtZero: true, ticks: { ...CHART_TICK, precision: 0 }, grid: CHART_GRID }
+    };
+}
+
+const CHART_BASE_OPTIONS = {
+    responsive: true,
+    maintainAspectRatio: true
+};
 
 // График 1: количество товаров по категориям.
 function renderCategoryChart() {
@@ -443,10 +467,7 @@ function renderCategoryChart() {
     const labels = categories.map((item) => item.label);
     const values = categories.map((item) => products.filter((product) => product.category === item.id).length);
 
-    // Перед перерисовкой всегда удаляем предыдущий инстанс.
-    if (categoryChart) {
-        categoryChart.destroy();
-    }
+    destroyChartIfExists(categoryChart);
 
     categoryChart = new Chart(categoryChartCanvas, {
         type: "bar",
@@ -463,24 +484,9 @@ function renderCategoryChart() {
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                x: {
-                    ticks: { color: "#d8e0ff" },
-                    grid: { color: "rgba(255,255,255,0.08)" }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: { color: "#d8e0ff", precision: 0 },
-                    grid: { color: "rgba(255,255,255,0.08)" }
-                }
-            }
+            ...CHART_BASE_OPTIONS,
+            plugins: { legend: { display: false } },
+            scales: chartScalesBarDefault()
         }
     });
 }
@@ -491,9 +497,7 @@ function renderStylesChart() {
     const labels = styles.map((item) => item.label);
     const values = styles.map((item) => products.filter((product) => product.styles.includes(item.id)).length);
 
-    if (stylesChart) {
-        stylesChart.destroy();
-    }
+    destroyChartIfExists(stylesChart);
 
     stylesChart = new Chart(stylesChartCanvas, {
         type: "doughnut",
@@ -508,13 +512,8 @@ function renderStylesChart() {
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    labels: { color: "#d8e0ff" }
-                }
-            }
+            ...CHART_BASE_OPTIONS,
+            plugins: { legend: { labels: { color: CHART_TICK.color } } }
         }
     });
 }
@@ -526,9 +525,7 @@ function renderCityDemandChart() {
     const orders = [1260, 980, 520, 470, 430, 610];
     const sumMln = [8.9, 6.8, 3.4, 3.1, 2.8, 4.2];
 
-    if (cityChart) {
-        cityChart.destroy();
-    }
+    destroyChartIfExists(cityChart);
 
     cityChart = new Chart(cityChartCanvas, {
         type: "bar",
@@ -557,28 +554,16 @@ function renderCityDemandChart() {
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    labels: { color: "#d8e0ff" }
-                }
-            },
+            ...CHART_BASE_OPTIONS,
+            plugins: { legend: { labels: { color: CHART_TICK.color } } },
             scales: {
-                x: {
-                    ticks: { color: "#d8e0ff" },
-                    grid: { color: "rgba(255,255,255,0.08)" }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: { color: "#d8e0ff", precision: 0 },
-                    grid: { color: "rgba(255,255,255,0.08)" }
-                },
+                x: { ticks: CHART_TICK, grid: CHART_GRID },
+                y: { beginAtZero: true, ticks: { ...CHART_TICK, precision: 0 }, grid: CHART_GRID },
                 y1: {
                     beginAtZero: true,
                     position: "right",
                     ticks: { color: "#ffcf9a" },
-                    grid: { color: "rgba(255,255,255,0.08)" }
+                    grid: CHART_GRID
                 }
             }
         }
@@ -727,164 +712,173 @@ function updateQty(productId, delta) {
     renderCart();
 }
 
-// Подписывает все обработчики событий интерфейса.
-function bindEvents() {
-    if (searchInput && categorySelect && styleSelect && sortSelect && productsGrid && styleNav) {
-        // Если jQuery доступен — используем его API, иначе fallback на native listeners.
-        if (window.jQuery) {
-            $(searchInput).on("input", () => {
-                currentPage = 1;
-                renderCatalog();
-            });
-            $(categorySelect).on("change", () => {
-                currentPage = 1;
-                renderCatalog();
-            });
-            $(styleSelect).on("change", () => {
-                currentPage = 1;
-                renderCatalog();
-            });
-            $(sortSelect).on("change", () => {
-                currentPage = 1;
-                renderCatalog();
-            });
-        } else {
-            [searchInput, categorySelect, styleSelect, sortSelect].forEach((input) => {
-                input.addEventListener("input", () => {
-                    currentPage = 1;
-                    renderCatalog();
-                });
-                input.addEventListener("change", () => {
-                    currentPage = 1;
-                    renderCatalog();
-                });
-            });
-        }
+// --- Обработчики UI (разные современные приёмы в bindEvents): именованные функции,
+// делегирование с event.target.closest(), AbortController + { signal }, фаза capture для одного сценария.
 
-        // Быстрые чипы стилей.
-        styleNav.addEventListener("click", (event) => {
-            const target = event.target;
-            if (!(target instanceof HTMLElement)) return;
-            const styleId = target.dataset.style;
-            if (!styleId) return;
-            styleSelect.value = styleId;
-            currentPage = 1;
-            renderCatalog();
-        });
+function onFilterChanged() {
+    currentPage = 1;
+    renderCatalog();
+}
 
-        // Действия в карточках каталога.
-        productsGrid.addEventListener("click", (event) => {
-            const target = event.target;
-            if (!(target instanceof HTMLElement)) return;
-            const role = target.dataset.role;
-            const productId = target.dataset.id;
-            if (!role || !productId) return;
-            if (role === "add") addToCart(productId);
-            if (role === "match") renderRecommendations(productId, target);
-        });
+/** Делегирование: клик по чипу стиля (всплытие), ищем ближайшую кнопку с data-style. */
+function handleStyleNavClick(event) {
+    const chip = event.target instanceof Element ? event.target.closest("button[data-style]") : null;
+    if (!chip || !styleNav.contains(chip)) return;
+    const styleId = chip.dataset.style;
+    if (!styleId) return;
+    styleSelect.value = styleId;
+    currentPage = 1;
+    renderCatalog();
+}
 
-        // Переключение страниц каталога.
-        paginationControls?.addEventListener("click", (event) => {
-            const target = event.target;
-            if (!(target instanceof HTMLElement)) return;
-            const pageValue = Number(target.dataset.page);
-            if (!Number.isFinite(pageValue) || pageValue < 1) return;
-            currentPage = pageValue;
-            renderCatalog();
-        });
+/** Делегирование: «В корзину» / «Сочетается с» в сетке каталога. */
+function handleProductsGridClick(event) {
+    const btn = event.target instanceof Element ? event.target.closest("button[data-role][data-id]") : null;
+    if (!btn || !productsGrid.contains(btn)) return;
+    const { role, id: productId } = btn.dataset;
+    if (!role || !productId) return;
+    if (role === "add") addToCart(productId);
+    if (role === "match") renderRecommendations(productId, btn);
+}
+
+/** Делегирование: кнопки пагинации с data-page. */
+function handlePaginationClick(event) {
+    if (!paginationControls) return;
+    const btn = event.target instanceof Element ? event.target.closest("button.page-btn[data-page]") : null;
+    if (!btn || !paginationControls.contains(btn)) return;
+    const pageValue = Number(btn.dataset.page);
+    if (!Number.isFinite(pageValue) || pageValue < 1) return;
+    currentPage = pageValue;
+    renderCatalog();
+}
+
+/** Делегирование: панель рекомендаций (закрыть / в корзину). */
+function handleRecommendPanelClick(event) {
+    const btn = event.target instanceof Element ? event.target.closest("button[data-role]") : null;
+    if (!btn || !recommendPanel.contains(btn)) return;
+    if (btn.dataset.role === "close-recommend") {
+        hideRecommendations();
+        return;
+    }
+    if (btn.dataset.role === "add" && btn.dataset.id) addToCart(btn.dataset.id);
+}
+
+/** Делегирование: +/- количества в корзине. */
+function handleCartItemsClick(event) {
+    const btn = event.target instanceof Element ? event.target.closest("button[data-role][data-id]") : null;
+    if (!btn || !cartItemsElement.contains(btn)) return;
+    const { role, id: productId } = btn.dataset;
+    if (!role || !productId) return;
+    if (role === "increase") updateQty(productId, 1);
+    if (role === "decrease") updateQty(productId, -1);
+}
+
+/** Прямая подписка: оформление заказа. */
+function handleCheckoutClick() {
+    if (!cart.length) {
+        alert("Корзина пока пустая.");
+        return;
+    }
+    const subtotal = cart.reduce((sum, row) => sum + row.qty * row.product.price, 0);
+    const discountRate = activePromo ? PROMO_CODES[activePromo] || 0 : 0;
+    const discountAmount = Math.round(subtotal * discountRate);
+    const deliveryCost = subtotal >= FREE_DELIVERY_FROM ? 0 : BASE_DELIVERY_COST;
+    const total = Math.max(0, subtotal - discountAmount + deliveryCost);
+    alert(`Заказ успешно оформлен на сумму ${formatPrice(total)}.`);
+    cart.splice(0, cart.length);
+    activePromo = null;
+    promoInput.value = "";
+    renderCart();
+}
+
+/** Прямая подписка: промокод. */
+function handleApplyPromoClick() {
+    const code = promoInput.value.trim().toUpperCase();
+    if (!code) {
+        activePromo = null;
+        renderCart();
+        return;
+    }
+    if (!PROMO_CODES[code]) {
+        promoNote.textContent = "Промокод не найден";
+        return;
+    }
+    activePromo = code;
+    renderCart();
+}
+
+function handleOpenCart() {
+    cartPanel?.classList.add("open");
+}
+
+function handleCloseCart() {
+    cartPanel?.classList.remove("open");
+}
+
+function handleWindowResize() {
+    const nowColumns = getCatalogColumns();
+    if (searchInput && nowColumns !== lastCatalogColumns) {
+        lastCatalogColumns = nowColumns;
+        currentPage = 1;
+        renderCatalog();
     }
 
-    // Кнопки внутри окна рекомендаций.
-    recommendPanel?.addEventListener("click", (event) => {
-        const target = event.target;
-        if (!(target instanceof HTMLElement)) return;
-        if (target.dataset.role === "close-recommend") {
-            hideRecommendations();
-            return;
-        }
-        if (target.dataset.role === "add" && target.dataset.id) addToCart(target.dataset.id);
-    });
+    if (!recommendPanel || !recommendPanel.classList.contains("open")) return;
+    if (window.innerWidth > 860 && recommendationAnchor) {
+        positionRecommendPanel(recommendationAnchor);
+    }
+}
 
-    recommendPanel?.addEventListener("mousedown", startRecommendationDrag);
-    document.addEventListener("mousemove", onRecommendationDrag);
-    document.addEventListener("mouseup", stopRecommendationDrag);
+/**
+ * Закрытие рекомендаций по клику вне панели.
+ * Подписка с capture: true — другой приём, чем у остальных слушателей (фаза перехвата).
+ */
+function handleDocumentClickRecommendCapture(event) {
+    if (!recommendPanel || !recommendPanel.classList.contains("open")) return;
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    const clickedInsidePanel = recommendPanel.contains(target);
+    const clickedMatchButton = target instanceof HTMLElement && target.dataset.role === "match";
+    const clickedOverlay = target === recommendOverlay;
+    if (!clickedInsidePanel && !clickedMatchButton && !clickedOverlay) {
+        hideRecommendations();
+    }
+}
 
-    // Изменение количества товаров в корзине.
-    cartItemsElement?.addEventListener("click", (event) => {
-        const target = event.target;
-        if (!(target instanceof HTMLElement)) return;
-        const role = target.dataset.role;
-        const productId = target.dataset.id;
-        if (!role || !productId) return;
-        if (role === "increase") updateQty(productId, 1);
-        if (role === "decrease") updateQty(productId, -1);
-    });
+// Подписывает все обработчики событий интерфейса.
+function bindEvents() {
+    const ac = new AbortController();
+    const { signal } = ac;
 
-    // Имитация оформления заказа (frontend-демо).
-    checkoutBtn?.addEventListener("click", () => {
-        if (!cart.length) {
-            alert("Корзина пока пустая.");
-            return;
-        }
-        const subtotal = cart.reduce((sum, row) => sum + row.qty * row.product.price, 0);
-        const discountRate = activePromo ? PROMO_CODES[activePromo] || 0 : 0;
-        const discountAmount = Math.round(subtotal * discountRate);
-        const deliveryCost = subtotal >= FREE_DELIVERY_FROM ? 0 : BASE_DELIVERY_COST;
-        const total = Math.max(0, subtotal - discountAmount + deliveryCost);
-        alert(`Заказ успешно оформлен на сумму ${formatPrice(total)}.`);
-        cart.splice(0, cart.length);
-        activePromo = null;
-        promoInput.value = "";
-        renderCart();
-    });
+    if (searchInput && categorySelect && styleSelect && sortSelect && productsGrid && styleNav) {
+        // Нативные слушатели (без смешения с jQuery): поиск — input; селекты — change.
+        searchInput.addEventListener("input", onFilterChanged, { signal });
+        [categorySelect, styleSelect, sortSelect].forEach((el) => {
+            el.addEventListener("change", onFilterChanged, { signal });
+        });
 
-    // Применение промокода.
-    applyPromoBtn?.addEventListener("click", () => {
-        const code = promoInput.value.trim().toUpperCase();
-        if (!code) {
-            activePromo = null;
-            renderCart();
-            return;
-        }
-        if (!PROMO_CODES[code]) {
-            promoNote.textContent = "Промокод не найден";
-            return;
-        }
-        activePromo = code;
-        renderCart();
-    });
+        styleNav.addEventListener("click", handleStyleNavClick, { signal });
+        productsGrid.addEventListener("click", handleProductsGridClick, { signal });
+        paginationControls?.addEventListener("click", handlePaginationClick, { signal });
+    }
 
-    cartFab?.addEventListener("click", () => cartPanel?.classList.add("open"));
-    closeCartBtn?.addEventListener("click", () => cartPanel?.classList.remove("open"));
-    recommendOverlay?.addEventListener("click", hideRecommendations);
+    recommendPanel?.addEventListener("click", handleRecommendPanelClick, { signal });
+    recommendPanel?.addEventListener("mousedown", startRecommendationDrag, { signal });
+    document.addEventListener("mousemove", onRecommendationDrag, { signal });
+    document.addEventListener("mouseup", stopRecommendationDrag, { signal });
 
-    // На resize синхронизируем пагинацию и положение панели рекомендаций.
-    window.addEventListener("resize", () => {
-        const nowColumns = getCatalogColumns();
-        if (searchInput && nowColumns !== lastCatalogColumns) {
-            lastCatalogColumns = nowColumns;
-            currentPage = 1;
-            renderCatalog();
-        }
+    cartItemsElement?.addEventListener("click", handleCartItemsClick, { signal });
 
-        if (!recommendPanel || !recommendPanel.classList.contains("open")) return;
-        if (window.innerWidth > 860 && recommendationAnchor) {
-            positionRecommendPanel(recommendationAnchor);
-        }
-    });
+    checkoutBtn?.addEventListener("click", handleCheckoutClick, { signal });
+    applyPromoBtn?.addEventListener("click", handleApplyPromoClick, { signal });
 
-    // Закрытие рекомендаций по клику вне панели.
-    document.addEventListener("click", (event) => {
-        if (!recommendPanel || !recommendPanel.classList.contains("open")) return;
-        const target = event.target;
-        if (!(target instanceof Node)) return;
-        const clickedInsidePanel = recommendPanel.contains(target);
-        const clickedMatchButton = target instanceof HTMLElement && target.dataset.role === "match";
-        const clickedOverlay = target === recommendOverlay;
-        if (!clickedInsidePanel && !clickedMatchButton && !clickedOverlay) {
-            hideRecommendations();
-        }
-    });
+    cartFab?.addEventListener("click", handleOpenCart, { signal });
+    closeCartBtn?.addEventListener("click", handleCloseCart, { signal });
+    recommendOverlay?.addEventListener("click", hideRecommendations, { signal });
+
+    window.addEventListener("resize", handleWindowResize, { signal });
+
+    document.addEventListener("click", handleDocumentClickRecommendCapture, { capture: true, signal });
 }
 
 // Единая точка запуска всех модулей страницы.

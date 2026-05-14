@@ -1,0 +1,1017 @@
+﻿
+/* =========================
+   1) БАЗА: шрифты и reset
+   ========================= */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at 10% 0%, #202744 0%, #080b13 42%, #05070d 100%);
+    color: #eaf0ff;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    padding: 1.1rem;
+}
+
+/* Светящийся кружочек на фоне */
+.page-glow {
+    position: fixed;
+    right: -110px;
+    top: -120px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(111, 91, 255, 0.35), rgba(111, 91, 255, 0));
+    pointer-events: none;
+}
+
+/* =========================
+   2) СЛОИ ПОВЕРХ КОНТЕНТА
+   ========================= */
+/* Затемняющий оверлей под окном рекомендаций */
+.recommend-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 7, 13, 0.45);
+    z-index: 35;
+}
+
+.recommend-overlay.open {
+    display: block;
+}
+
+/* =========================
+   3) ОБЩИЕ МЕДИА-ЭЛЕМЕНТЫ
+   ========================= */
+/* Универсальный стиль контентных изображений */
+.content-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  margin-top: 0.65rem;
+  display: block;
+}
+
+/* Заголовок страницы только для читалок и SEO (визуально скрыт) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* =========================
+   4) ШАПКА И НАВИГАЦИЯ
+   ========================= */
+/* Верхняя панель: компактная навигация (+ корзина на главной) */
+.topbar {
+    max-width: 1400px;
+    margin: 0 auto 0.55rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(16, 22, 38, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    padding: 0.5rem 0.65rem;
+    position: sticky;
+    top: 0.7rem;
+    z-index: 25;
+    backdrop-filter: blur(8px);
+}
+
+.topbar-main {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+}
+
+.topbar-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+/* Главное меню: одна линия, на узком экране — прокрутка */
+.site-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 0.32rem;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.12rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+    -webkit-overflow-scrolling: touch;
+}
+
+.site-menu::-webkit-scrollbar {
+    height: 3px;
+}
+
+.site-menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+}
+
+.site-menu a {
+    text-decoration: none;
+    color: #dce4ff;
+    font-size: 0.76rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 0.24rem 0.52rem;
+    background: rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.site-menu a.active {
+    background: linear-gradient(130deg, #6f5bff, #4d7bff);
+    border-color: transparent;
+}
+
+/* Быстрые ссылки под hero-блоком */
+.quick-nav {
+    max-width: 1400px;
+    margin: 0 auto 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+}
+
+.quick-nav a {
+    text-decoration: none;
+    color: #dae2ff;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0.3rem 0.62rem;
+    background: rgba(16, 22, 38, 0.75);
+}
+
+.quick-nav a:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Текстовая метка бренда */
+.brand-mark {
+    color: #c4cdef;
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Исторический placeholder под логотип */
+.logo-placeholder {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d6e0ff;
+    font-size: 0.68rem;
+    position: absolute;
+    right: 8px;
+    top: 2px;
+    margin-bottom: 0;
+}
+
+/* Мини-логотип для некоторых макетов */
+.logo-mini {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.brand-slogan {
+    margin-top: 0.22rem;
+    color: #b8c4ea;
+    font-size: 0.79rem;
+}
+
+/* =========================
+   5) HERO-СЕКЦИЯ БРЕНДА
+   ========================= */
+.brand-hero {
+    max-width: 1400px;
+    margin: 0 auto 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    background: linear-gradient(140deg, rgba(14, 21, 38, 0.96), rgba(10, 15, 30, 0.96));
+    padding: 1.45rem 1rem 1.2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.brand-hero-logo-link {
+    display: block;
+    line-height: 0;
+    margin-bottom: 0.65rem;
+}
+
+.brand-hero-logo {
+    width: clamp(300px, 78vmin, 540px);
+    height: auto;
+    max-height: 540px;
+    object-fit: contain;
+    display: block;
+}
+
+.brand-hero-slogan,
+.brand-hero-subtitle {
+    margin-top: 0.2rem;
+    color: #bfcaf1;
+    font-size: clamp(1rem, 2.1vw, 1.2rem);
+    max-width: 34rem;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* Исторический placeholder (если временно нет логотипа) */
+.hero-logo-placeholder {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    width: 74px;
+    height: 74px;
+    border-radius: 16px;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d6e0ff;
+    font-size: 0.72rem;
+}
+
+/* Кнопка быстрого открытия корзины */
+.cart-fab {
+    border: none;
+    border-radius: 10px;
+    padding: 0.42rem 0.75rem;
+    background: linear-gradient(130deg, #6f5bff, #4d7bff);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* =========================
+   6) ГЛАВНАЯ СЕТКА СТРАНИЦЫ
+   ========================= */
+.layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr) 320px;
+    gap: 0.9rem;
+    align-items: start;
+}
+
+/* Базовый стиль панелей layout */
+.filters-panel,
+.catalog-panel,
+.cart-panel {
+    background: rgba(16, 22, 38, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 0.95rem;
+}
+
+/* Левая колонка фильтров фиксируется на desktop */
+.filters-panel {
+    position: sticky;
+    top: 4.35rem;
+}
+
+.filters-panel h2,
+.catalog-header h2,
+.cart-head h2 {
+    font-size: 1.02rem;
+}
+
+/* =========================
+   7) ПРОМО-БЛОК НАД КАТАЛОГОМ
+   ========================= */
+.store-intro {
+    background: linear-gradient(130deg, rgba(111, 91, 255, 0.2), rgba(77, 123, 255, 0.08));
+    border: 1px solid rgba(159, 173, 255, 0.35);
+    border-radius: 12px;
+    padding: 0.75rem;
+    margin-bottom: 0.82rem;
+}
+
+.intro-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #bdc8f3;
+}
+
+.store-intro h2 {
+    margin-top: 0.3rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.38rem);
+}
+
+.store-intro p {
+    margin-top: 0.32rem;
+    color: #d4ddff;
+    font-size: 0.86rem;
+}
+
+.intro-tags {
+    margin-top: 0.56rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.intro-tags span {
+    font-size: 0.72rem;
+    color: #d6e0ff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 0.24rem 0.55rem;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* =========================
+   8) МЕТРИКИ И СТАТИСТИКА
+   ========================= */
+.stats-row {
+    margin-top: 0.56rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+
+.stat-item {
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 10px;
+    padding: 0.45rem;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-item span {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #f0f4ff;
+}
+
+.stat-item p {
+    margin-top: 0.16rem;
+    font-size: 0.72rem;
+    color: #c7d1f3;
+}
+
+/* =========================
+   9) ФИЛЬТРЫ КАТАЛОГА
+   ========================= */
+.control-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+    gap: 0.35rem;
+}
+
+.control-group span {
+    color: #9da8c9;
+    font-size: 0.82rem;
+}
+
+.control-group input,
+.control-group select {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #0f1525;
+    color: #eaf0ff;
+    border-radius: 10px;
+    padding: 0.55rem 0.6rem;
+}
+
+/* =========================
+   10) ЗАГОЛОВОК КАТАЛОГА И ЧИПЫ СТИЛЕЙ
+   ========================= */
+.catalog-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+#catalogInfo {
+    color: #9da8c9;
+    font-size: 0.84rem;
+}
+
+.style-nav {
+    margin-top: 0.7rem;
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.style-chip {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    color: #cdd5f4;
+    border-radius: 999px;
+    padding: 0.35rem 0.62rem;
+    font-size: 0.74rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.style-chip:hover {
+    border-color: rgba(255, 255, 255, 0.26);
+    transform: translateY(-1px);
+}
+
+.style-chip.active {
+    background: linear-gradient(130deg, #6f5bff, #4d7bff);
+    border-color: transparent;
+    color: #fff;
+}
+
+/* =========================
+   11) СЕТКА ТОВАРОВ И ПАГИНАЦИЯ
+   ========================= */
+.products-grid {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 0.7rem;
+}
+
+.pagination {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.page-btn {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: #d5def9;
+    border-radius: 8px;
+    padding: 0.36rem 0.62rem;
+    font-size: 0.76rem;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background: linear-gradient(130deg, #6f5bff, #4d7bff);
+    border-color: transparent;
+}
+
+.placeholder-card {
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* =========================
+   12) КАРТОЧКИ ТОВАРОВ
+   ========================= */
+.product-card {
+    background: #151d31;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 188px minmax(170px, 1fr);
+    height: 100%;
+    transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(155, 170, 255, 0.5);
+    box-shadow: 0 12px 22px -18px rgba(77, 123, 255, 0.9);
+}
+
+.product-image-wrap {
+    background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.01));
+    padding: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    height: 188px;
+}
+
+.product-image,
+.recommend-image {
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+    object-position: center;
+    image-rendering: auto;
+    transform: translateY(var(--img-offset-y, 0%)) scale(var(--img-scale, 0.88));
+}
+
+.product-meta {
+    padding: 0.6rem;
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
+    row-gap: 0.35rem;
+    align-content: start;
+}
+
+.product-category {
+    font-size: 0.66rem;
+    color: #9aa5c8;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.product-meta h3 {
+    font-size: 0.86rem;
+    line-height: 1.25;
+    min-height: 2.2em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-sub {
+    color: #9da8c9;
+    font-size: 0.75rem;
+}
+
+.product-footer {
+    margin-top: 0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+}
+
+.product-price,
+.recommend-price {
+    color: #adffcb;
+    font-weight: 700;
+    font-size: 0.84rem;
+}
+
+.card-btn,
+.checkout-btn {
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(130deg, #6f5bff, #4d7bff);
+    color: #fff;
+    padding: 0.42rem 0.6rem;
+    font-size: 0.72rem;
+    cursor: pointer;
+}
+
+.link-btn {
+    margin-top: auto;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    color: #cfd7f5;
+    border-radius: 9px;
+    padding: 0.4rem;
+    font-size: 0.72rem;
+    cursor: pointer;
+}
+
+/* =========================
+   13) ПАНЕЛЬ РЕКОМЕНДАЦИЙ
+   ========================= */
+.recommend-panel {
+    margin-top: 0.95rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    padding: 0.75rem;
+    display: none;
+    position: fixed;
+    width: min(460px, calc(100vw - 24px));
+    max-height: min(420px, calc(100vh - 24px));
+    overflow-y: auto;
+    z-index: 40;
+    box-shadow: 0 26px 60px -28px rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+}
+
+.recommend-empty {
+    color: #9da8c9;
+    font-size: 0.88rem;
+}
+
+.recommend-panel.open {
+    display: block;
+}
+
+.recommend-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-bottom: 0.3rem;
+    cursor: move;
+    user-select: none;
+}
+
+.recommend-head p {
+    color: #9da8c9;
+    font-size: 0.8rem;
+}
+
+.recommend-close {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #d7def8;
+    border-radius: 8px;
+    padding: 0.32rem 0.55rem;
+    font-size: 0.72rem;
+    cursor: pointer;
+}
+
+.recommend-grid {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.5rem;
+}
+
+.recommend-card {
+    background: #121a2d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+}
+
+.recommend-image {
+    aspect-ratio: 1 / 1;
+    background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    border-radius: 8px;
+    padding: 0.3rem;
+}
+
+.recommend-name {
+    font-size: 0.78rem;
+    line-height: 1.2;
+}
+
+/* =========================
+   14) КОРЗИНА И ОФОРМЛЕНИЕ
+   ========================= */
+.cart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.close-cart {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #b8c3e6;
+    cursor: pointer;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    max-height: 290px;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+}
+
+.cart-empty {
+    color: #9da8c9;
+}
+
+.cart-item {
+    background: #131b2e;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.48rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.55rem;
+}
+
+.cart-item-name {
+    font-size: 0.8rem;
+}
+
+.cart-item-price {
+    font-size: 0.74rem;
+    color: #9da8c9;
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.qty-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #d3dcf8;
+    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.cart-total-row {
+    margin-top: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: #d4dcf8;
+    font-size: 0.86rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.6rem;
+}
+
+.checkout-btn {
+    margin-top: 0.7rem;
+    width: 100%;
+    padding: 0.58rem;
+    font-weight: 700;
+}
+
+.delivery-progress {
+    margin-bottom: 0.6rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.delivery-progress p {
+    font-size: 0.74rem;
+    color: #c5d0f3;
+    margin-bottom: 0.35rem;
+}
+
+.delivery-bar {
+    width: 100%;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.delivery-bar span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(130deg, #7a62ff, #55c9ff);
+    transition: width 0.25s ease;
+}
+
+.promo-row {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.4rem;
+}
+
+.promo-row input {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: #0f1525;
+    color: #e9efff;
+    border-radius: 9px;
+    padding: 0.45rem 0.55rem;
+}
+
+.promo-row button {
+    border: none;
+    border-radius: 9px;
+    padding: 0.45rem 0.65rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e7edff;
+    cursor: pointer;
+}
+
+.promo-note {
+    margin-top: 0.35rem;
+    color: #a8b4dc;
+    font-size: 0.74rem;
+}
+
+/* =========================
+   15) ПУСТЫЕ СОСТОЯНИЯ И КОНТЕНТНЫЕ СЕКЦИИ
+   ========================= */
+.empty-state {
+    color: #9da8c9;
+}
+
+.content-sections {
+    max-width: 1400px;
+    margin: 0.95rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.content-card {
+    background: rgba(16, 22, 38, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 0.9rem;
+}
+
+.content-card h3 {
+    font-size: 0.98rem;
+    margin-bottom: 0.45rem;
+}
+
+.content-card ul {
+    padding-left: 1.05rem;
+    color: #c6d0ef;
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+.content-card a {
+    color: #bdd0ff;
+    text-decoration: none;
+}
+
+.content-card a:hover {
+    text-decoration: underline;
+}
+
+.content-list {
+    margin-top: 0.55rem;
+    padding-left: 1.2rem;
+    color: #c6d0ef;
+    line-height: 1.6;
+}
+
+.chart-caption {
+    color: #c6d0ef;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+
+#categoryChart {
+    width: 100%;
+    height: 230px !important;
+}
+
+#stylesChart {
+    width: 100%;
+    height: 230px !important;
+}
+
+#cityChart {
+    width: 100%;
+    height: 230px !important;
+}
+
+.image-placeholder {
+    margin-top: 0.65rem;
+    height: 220px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.28);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b6c2e9;
+    font-size: 0.82rem;
+    text-align: center;
+    padding: 0.6rem;
+}
+
+.two-col {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+/* Карточка графика "Где чаще покупают" должна занимать всю ширину ряда. */
+.city-demand-card {
+    grid-column: 1 / -1;
+}
+
+/* Подвал сайта */
+.site-footer {
+    max-width: 1400px;
+    margin: 0.8rem auto 0;
+    text-align: center;
+    color: #97a3c8;
+    font-size: 0.76rem;
+    padding-bottom: 0.8rem;
+}
+
+/* =========================
+   16) CMS: админ-форма и таблица
+   ========================= */
+.cms-layout {
+    grid-template-columns: 1fr 1fr;
+}
+
+.cms-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+}
+
+.cms-form .control-group {
+    margin-top: 0;
+}
+
+.cms-styles-group {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 0.55rem 0.6rem;
+    background: #0f1525;
+}
+
+.cms-styles-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-right: 0.7rem;
+    margin-top: 0.45rem;
+    font-size: 0.86rem;
+}
+
+.cms-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.cms-table-wrap {
+    margin-top: 0.7rem;
+    overflow-x: auto;
+}
+
+.cms-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+.cms-table th,
+.cms-table td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.45rem;
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.8rem;
+}
+
+.cms-table th {
+    background: rgba(255, 255, 255, 0.06);
+    color: #dce5ff;
+}
+
+.cms-edit-btn,
+.cms-del-btn {
+    margin-right: 0.35rem;
+}

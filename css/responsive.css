@@ -1,0 +1,186 @@
+﻿/* =========================
+   17) АДАПТИВ: планшеты и небольшие ноутбуки
+   ========================= */
+@media (max-width: 1150px) {
+    .layout {
+        grid-template-columns: 250px minmax(0, 1fr);
+    }
+
+    .cart-panel {
+        position: fixed;
+        right: 0.7rem;
+        top: 5.5rem;
+        width: min(360px, calc(100vw - 1.4rem));
+        max-height: calc(100vh - 6rem);
+        overflow-y: auto;
+        transform: translateX(120%);
+        transition: transform 0.22s ease;
+        z-index: 20;
+    }
+
+    .cart-panel.open {
+        transform: translateX(0);
+    }
+
+    .close-cart {
+        display: block;
+    }
+
+    .filters-panel {
+        position: static;
+    }
+
+    .cms-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   18) АДАПТИВ: мобильные устройства
+   ========================= */
+@media (max-width: 760px) {
+    .topbar {
+        padding: 0.38rem 0.45rem;
+        margin-bottom: 0.42rem;
+    }
+
+    .topbar-main {
+        gap: 0.35rem;
+    }
+
+    .site-menu {
+        gap: 0.24rem;
+    }
+
+    .site-menu a {
+        font-size: 0.68rem;
+        padding: 0.18rem 0.4rem;
+    }
+
+    .cart-fab {
+        padding: 0.32rem 0.5rem;
+        font-size: 0.72rem;
+        border-radius: 8px;
+    }
+
+    .brand-hero {
+        padding: 0.85rem 0.75rem 0.95rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .brand-hero-logo {
+        width: clamp(252px, 87vmin, 450px);
+        max-height: 450px;
+    }
+
+    .brand-hero-slogan,
+    .brand-hero-subtitle {
+        font-size: clamp(0.92rem, 2.6vw, 1.08rem);
+    }
+
+    .logo-placeholder {
+        position: static;
+        margin: 0 auto 0.3rem;
+    }
+
+    .hero-logo-placeholder {
+        position: static;
+        margin: 0.45rem auto 0;
+    }
+
+    .logo-mini {
+        margin: 0 auto 0.3rem;
+        display: block;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-nav {
+        margin-bottom: 0.6rem;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-card {
+        grid-template-rows: 170px minmax(165px, 1fr);
+    }
+
+    .product-image-wrap {
+        height: 170px;
+    }
+
+    .content-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .recommend-panel {
+        left: 12px !important;
+        right: 12px;
+        top: auto !important;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+        max-height: min(68vh, 520px);
+    }
+
+    .recommend-head {
+        cursor: default;
+    }
+
+    .cms-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   19) АДАПТИВ: очень узкие экраны
+   ========================= */
+@media (max-width: 480px) {
+    body {
+        padding: 0.65rem;
+    }
+
+    .site-menu a {
+        font-size: 0.64rem;
+        padding: 0.16rem 0.36rem;
+    }
+
+    .cart-fab {
+        padding: 0.28rem 0.42rem;
+        font-size: 0.68rem;
+    }
+
+    .brand-hero-logo {
+        width: clamp(228px, 96vmin, 420px);
+        max-height: 420px;
+    }
+
+    .brand-hero-slogan,
+    .brand-hero-subtitle {
+        font-size: clamp(0.88rem, 3.2vw, 1.02rem);
+    }
+
+    .products-grid,
+    .recommend-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        grid-template-rows: 190px minmax(160px, 1fr);
+    }
+
+    .product-image-wrap {
+        height: 190px;
+    }
+
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+}
