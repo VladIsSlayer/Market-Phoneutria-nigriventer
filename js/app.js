@@ -216,6 +216,8 @@ function renderCatalog() {
     const startIdx = (currentPage - 1) * itemsPerPage;
     const pageItems = filtered.slice(startIdx, startIdx + itemsPerPage);
 
+
+    //Переменные для подгонки карточек до ровной сетки
     productsGrid.innerHTML = pageItems
         .map(
             (item) => `
@@ -425,7 +427,7 @@ function renderRecommendations(productId, anchorElement = null) {
         </div>
         <div class="recommend-grid">
             ${matches
-                .map(
+                .map(       //Перебираем массив совместимых товаров и формируем HTML для каждого товара
                     (item) => `
                         <article class="recommend-card">
                             <img src="${item.image}" alt="${item.name}" class="recommend-image" style="--img-scale:${item.imageScale ?? 0.88}; --img-offset-y:${item.imageOffsetY ?? "0%"};">

@@ -48,7 +48,7 @@ function setStatus(text, isError = false) {
 function clearForm() {
     cmsId.value = "";
     cmsName.value = "";
-    cmsCategory.value = "top";
+    cmsCategory.value = "";
     cmsImage.value = "";
     cmsPrice.value = "";
     cmsStyleCheckboxes.forEach((checkbox) => {
