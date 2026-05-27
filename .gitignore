@@ -1,0 +1,5 @@
+# Отчеты и сопутствующие документы в docs
+docs/*.doc
+docs/*.docx
+docs/*.pdf
+docs/~$*
