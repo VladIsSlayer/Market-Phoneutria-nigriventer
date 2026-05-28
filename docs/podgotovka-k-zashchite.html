@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Подготовка к защите — Phoneutria nigriventer</title>
+  <style>
+    @page { margin: 18mm 15mm; }
+    body { font-family: "Segoe UI", Arial, sans-serif; font-size: 11pt; line-height: 1.45; color: #1a1a1a; max-width: 210mm; margin: 0 auto; padding: 12mm; }
+    h1 { font-size: 20pt; border-bottom: 2px solid #333; padding-bottom: 6px; page-break-after: avoid; }
+    h2 { font-size: 14pt; margin-top: 1.4em; color: #222; page-break-after: avoid; }
+    h3 { font-size: 12pt; margin-top: 1em; page-break-after: avoid; }
+    p, li { text-align: justify; }
+    code { font-family: Consolas, "Courier New", monospace; font-size: 9.5pt; background: #f4f4f4; padding: 1px 4px; border-radius: 3px; }
+    pre { font-family: Consolas, monospace; font-size: 8.5pt; background: #f6f8fa; border: 1px solid #ddd; border-left: 4px solid #4a6fa5; padding: 10px 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; page-break-inside: avoid; }
+    .file { color: #555; font-size: 9pt; margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; page-break-inside: avoid; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; vertical-align: top; }
+    th { background: #eef2f7; }
+    .tip { background: #f0f7ff; border-left: 4px solid #3b7ddd; padding: 8px 12px; margin: 10px 0; font-size: 10pt; }
+    .warn { background: #fff8e6; border-left: 4px solid #d4a017; padding: 8px 12px; margin: 10px 0; font-size: 10pt; }
+    ul { margin: 0.4em 0; }
+    .toc a { color: #1a4a8a; text-decoration: none; }
+    hr { border: none; border-top: 1px solid #ccc; margin: 1.5em 0; }
+  </style>
+</head>
+<body>
+
+<h1>Подготовка к защите курсовой работы</h1>
+<p><strong>Проект:</strong> интернет-магазин одежды Phoneutria nigriventer (NOIR DISTRICT)<br>
+<strong>Стек:</strong> HTML5, CSS3, JavaScript (ES6), jQuery UI, Chart.js, CountUp.js, localStorage</p>
+
+<nav class="toc">
+  <h2>Содержание</h2>
+  <ol>
+    <li><a href="#s1">Структура проекта</a></li>
+    <li><a href="#s2">Единицы измерения в CSS</a></li>
+    <li><a href="#s3">CSS-переменные (--img-scale, --img-offset-y)</a></li>
+    <li><a href="#s4">Представление данных: массивы и объекты</a></li>
+    <li><a href="#s5">localStorage и JSON</a></li>
+    <li><a href="#s6">События: клики, формы, делегирование</a></li>
+    <li><a href="#s7">Ключевые алгоритмы</a></li>
+    <li><a href="#s8">Вопросы на защите</a></li>
+  </ol>
+</nav>
+
+<hr>
+
+<h2 id="s1">1. Структура проекта</h2>
+<table>
+  <tr><th>Путь</th><th>Назначение</th></tr>
+  <tr><td><code>pages/*.html</code></td><td>5 страниц: главная, о проекте, доставка, FAQ, CMS</td></tr>
+  <tr><td><code>css/screen.css</code></td><td>Основные стили</td></tr>
+  <tr><td><code>css/responsive.css</code></td><td>Адаптив (1150 / 760 / 480 px)</td></tr>
+  <tr><td><code>style.css</code></td><td>Подключает оба CSS через @import</td></tr>
+  <tr><td><code>js/data.js</code></td><td>Справочники и базовый каталог (массивы)</td></tr>
+  <tr><td><code>js/app.js</code></td><td>Каталог, корзина, рекомендации, графики</td></tr>
+  <tr><td><code>admin.js</code></td><td>CMS: добавление/редактирование товаров</td></tr>
+  <tr><td><code>robots.txt</code>, <code>sitemap.xml</code></td><td>SEO для публикации</td></tr>
+</table>
+<p>Порядок подключения скриптов на главной: <code>data.js</code> → <code>app.js</code>. На админке: <code>data.js</code> → <code>admin.js</code>.</p>
+
+<hr>
+
+<h2 id="s2">2. Единицы измерения в CSS</h2>
+<p>В проекте <strong>не используется</strong> единица <code>ch</code> (ширина символа «0»). Ниже — единицы, которые реально встречаются в <code>screen.css</code> и <code>responsive.css</code>.</p>
+
+<table>
+  <tr><th>Единица</th><th>Что это</th><th>Где в проекте</th></tr>
+  <tr><td><code>px</code></td><td>Пиксели, фиксированный размер</td><td>Границы 1px, иконки 46×46px, скроллбар height: 3px, сетка каталога 270px / 320px</td></tr>
+  <tr><td><code>rem</code></td><td>Относительно корневого font-size (обычно 16px)</td><td>Отступы padding: 1.1rem, шрифты 0.86rem, gap в grid</td></tr>
+  <tr><td><code>em</code></td><td>Относительно font-size текущего элемента</td><td>letter-spacing: 0.12em в подписях категорий</td></tr>
+  <tr><td><code>%</code></td><td>Процент от родителя</td><td>width: 100%, прогресс доставки, imageOffsetY: "0%" в данных</td></tr>
+  <tr><td><code>vh</code>, <code>vw</code></td><td>% от высоты/ширины окна</td><td>min-height: 100vh у body; calc(100vw - 1.4rem) у корзины на планшете</td></tr>
+  <tr><td><code>vmin</code></td><td>Меньшее из vh и vw</td><td>clamp(252px, 87vmin, 450px) — логотип на мобильных</td></tr>
+  <tr><td><code>fr</code></td><td>Доля свободного места в CSS Grid</td><td>grid-template-columns: 270px minmax(0, 1fr) 320px</td></tr>
+  <tr><td><code>deg</code></td><td>Градусы (градиенты, повороты)</td><td>linear-gradient(135deg, …) в .page-glow</td></tr>
+  <tr><td><code>s</code></td><td>Секунды (анимации)</td><td>transition: transform 0.22s ease</td></tr>
+</table>
+
+<h3>Функции calc(), min(), max(), clamp(), minmax()</h3>
+<ul>
+  <li><code>calc(100vw - 1.4rem)</code> — ширина выезжающей корзины с отступом от края экрана (<code>responsive.css</code>, ~стр. 13).</li>
+  <li><code>min(360px, calc(100vw - 1.4rem))</code> — не шире 360px и не вылезает за экран.</li>
+  <li><code>clamp(252px, 87vmin, 450px)</code> — логотип: минимум 252px, предпочтительно 87vmin, максимум 450px.</li>
+  <li><code>minmax(0, 1fr)</code> — колонка сетки может сжиматься до 0, растёт на оставшееся место.</li>
+</ul>
+
+<div class="tip"><strong>На защите:</strong> rem удобен для масштабирования всего интерфейса; px — для тонких линий и точных размеров; vw/vh — привязка к окну браузера; fr — только в Grid.</div>
+
+<hr>
+
+<h2 id="s3">3. CSS-переменные (кастомные свойства)</h2>
+<p>В проекте две переменные задаются <strong>инлайн</strong> на каждой картинке товара и читаются в CSS.</p>
+
+<p class="file">js/app.js — при рендере карточки (строки 226–227):</p>
+<pre>&lt;img ... style="--img-scale:${item.imageScale ?? 0.88}; --img-offset-y:${item.imageOffsetY ?? "0%"};"&gt;</pre>
+
+<p class="file">css/screen.css — применение (строка 542):</p>
+<pre>transform: translateY(var(--img-offset-y, 0%)) scale(var(--img-scale, 0.88));</pre>
+
+<p class="file">js/data.js — значения в объекте товара (пример, строка 29):</p>
+<pre>{ id: "tshirt-1", ..., imageScale: 0.84, imageOffsetY: "0%" }</pre>
+
+<p><strong>Зачем:</strong> разные PNG по размеру визуально выровнять в одной карточке без отдельного класса на каждый товар. Второй аргумент в <code>var(--img-scale, 0.88)</code> — значение по умолчанию, если переменная не задана.</p>
+
+<hr>
+
+<h2 id="s4">4. Представление данных: массивы и объекты</h2>
+
+<h3>4.1. Справочники и каталог (data.js)</h3>
+<p>Данные вынесены в глобальные переменные на <code>window</code>, чтобы их видели и <code>app.js</code>, и <code>admin.js</code>.</p>
+
+<p class="file">js/data.js (строки 12–18, 28–29):</p>
+<pre>window.NOIR_STYLES = new Array(
+    { id: "y2k", label: "Y2K" },
+    ...
+);
+window.NOIR_BASE_PRODUCTS = new Array(
+    { id: "tshirt-1", name: "...", category: "top", price: 1499,
+      styles: new Array("punk", "grunge"), rating: 4.6, ... },
+    ...
+);</pre>
+
+<ul>
+  <li><strong>Массив</strong> — упорядоченный список элементов (стили, категории, товары).</li>
+  <li><strong>Объект</strong> — одна сущность с полями: <code>id</code>, <code>name</code>, <code>price</code>, <code>styles</code> (массив id стилей).</li>
+  <li><code>new Array(...)</code> — конструктор массива (в методичке ГУАП часто требуют именно так).</li>
+</ul>
+
+<h3>4.2. «Вектор» в контексте курсовой</h3>
+<p>В математике вектор — набор чисел. В вашем проекте ближайшие аналоги:</p>
+<ul>
+  <li>массив <code>styles: ["punk", "grunge"]</code> — список меток стилей;</li>
+  <li>массив <code>cart</code> — строки корзины <code>{ product, qty }</code>;</li>
+  <li>при построении графика Chart.js — массивы <code>labels</code> и <code>values</code> (категории и количество товаров).</li>
+</ul>
+<p>Отдельного типа «Vector» в JavaScript нет — используются обычные массивы.</p>
+
+<h3>4.3. Типичные операции с массивами в app.js</h3>
+<table>
+  <tr><th>Метод</th><th>Зачем</th><th>Пример в коде</th></tr>
+  <tr><td><code>.filter()</code></td><td>Отбор по условию</td><td>Фильтр каталога по поиску/категории/стилю (стр. 180–185)</td></tr>
+  <tr><td><code>.map()</code></td><td>Преобразовать каждый элемент</td><td>Генерация HTML карточек (стр. 222–240)</td></tr>
+  <tr><td><code>.find()</code></td><td>Найти один элемент</td><td><code>findById(productId)</code> (стр. 280–281)</td></tr>
+  <tr><td><code>.sort()</code></td><td>Сортировка</td><td>Цена, имя, рейтинг (стр. 187–193)</td></tr>
+  <tr><td><code>.reduce()</code></td><td>Свернуть в одно значение</td><td>Сумма корзины (стр. 637–638)</td></tr>
+  <tr><td><code>.slice()</code></td><td>Копия части массива</td><td>Страница каталога (стр. 217)</td></tr>
+  <tr><td><code>.includes()</code></td><td>Есть ли значение</td><td>Проверка стиля у товара (стр. 183)</td></tr>
+</table>
+
+<h3>4.4. Объект совместимости категорий</h3>
+<p class="file">js/app.js (строки 285–291):</p>
+<pre>const CATEGORY_COMPATIBILITY = {
+    top: ["bottom", "shoes", "outerwear", "accessory"],
+    bottom: ["top", "shoes", ...],
+    ...
+};</pre>
+<p>Это <strong>объект-словарь</strong>: ключ — категория товара, значение — массив подходящих категорий для рекомендаций «с чем носить».</p>
+
+<hr>
+
+<h2 id="s5">5. localStorage и JSON</h2>
+<table>
+  <tr><th>Ключ</th><th>Что хранится</th><th>Файл</th></tr>
+  <tr><td><code>noir-products-v1</code></td><td>Массив товаров каталога (после CMS)</td><td>data.js, app.js, admin.js</td></tr>
+  <tr><td><code>noir-cart</code></td><td>Корзина + промокод</td><td>app.js</td></tr>
+</table>
+
+<p class="file">Сохранение корзины (app.js, 117–122):</p>
+<pre>localStorage.setItem("noir-cart", JSON.stringify({
+    items: cart.map((row) => ({ productId: row.product.id, qty: row.qty })),
+    activePromo
+}));</pre>
+
+<p class="file">Загрузка каталога (app.js, 103–108):</p>
+<pre>const stored = safeJsonParse(localStorage.getItem(PRODUCTS_STORAGE_KEY) || "");
+if (!Array.isArray(stored)) return BASE_PRODUCTS.slice();
+return stored.map(normalizeProduct).filter(Boolean);</pre>
+
+<p><code>JSON.stringify</code> — объект/массив → строка. <code>JSON.parse</code> — строка → данные. В localStorage можно хранить только строки.</p>
+
+<hr>
+
+<h2 id="s6">6. События: как работают клики и формы</h2>
+
+<h3>6.1. onclick в HTML vs addEventListener в JS</h3>
+<p>В проекте <strong>не используется</strong> атрибут <code>onclick="..."</code> в HTML. Все обработчики вешаются в JavaScript — это современный и удобный для поддержки подход.</p>
+<pre>// Прямая подписка на конкретную кнопку:
+checkoutBtn?.addEventListener("click", handleCheckoutClick, { signal });
+
+// Отправка формы CMS (не click, а submit):
+cmsForm.addEventListener("submit", onSubmit, { signal });</pre>
+
+<h3>6.2. Делегирование событий</h3>
+<p>Один обработчик на родителе ловит клики по динамически созданным кнопкам (карточки каталога перерисовываются через innerHTML).</p>
+
+<p class="file">app.js — каталог (737–744):</p>
+<pre>function handleProductsGridClick(event) {
+    const btn = event.target.closest("button[data-role][data-id]");
+    if (!btn || !productsGrid.contains(btn)) return;
+    const { role, id: productId } = btn.dataset;
+    if (role === "add") addToCart(productId);
+    if (role === "match") renderRecommendations(productId, btn);
+}
+productsGrid.addEventListener("click", handleProductsGridClick, { signal });</pre>
+
+<p><strong>Цепочка:</strong> пользователь кликает → браузер создаёт объект <code>event</code> → всплытие (bubbling) до <code>productsGrid</code> → <code>closest</code> находит кнопку → читаем <code>data-role</code> и <code>data-id</code> → вызываем нужную функцию.</p>
+
+<h3>6.3. Типы событий в проекте</h3>
+<table>
+  <tr><th>Событие</th><th>Элемент</th><th>Действие</th></tr>
+  <tr><td><code>input</code></td><td>Поле поиска</td><td>Фильтр каталога при вводе</td></tr>
+  <tr><td><code>change</code></td><td>Select фильтров</td><td>Перерисовка каталога</td></tr>
+  <tr><td><code>click</code></td><td>Кнопки, чипы, пагинация</td><td>Корзина, рекомендации, CMS-таблица</td></tr>
+  <tr><td><code>submit</code></td><td>Форма CMS</td><td>Добавить/обновить товар</td></tr>
+  <tr><td><code>mousedown/mousemove/mouseup</code></td><td>Панель рекомендаций</td><td>Перетаскивание на десктопе</td></tr>
+  <tr><td><code>resize</code></td><td>window</td><td>Пересчёт колонок каталога</td></tr>
+</table>
+
+<h3>6.4. admin.js — кнопки в таблице</h3>
+<p class="file">admin.js (178–199):</p>
+<pre>function onTableClick(event) {
+    const btn = event.target.closest("button[data-role][data-id]");
+    ...
+    if (role === "edit") fillForm(product);
+    if (role === "delete") { saveProducts(next); renderTable(); }
+}</pre>
+
+<p class="file">Форма — preventDefault (158–159):</p>
+<pre>function onSubmit(event) {
+    event.preventDefault();  // не перезагружать страницу
+    ...
+}</pre>
+
+<h3>6.5. AbortController</h3>
+<p>В <code>bindEvents()</code> все слушатели получают <code>{ signal }</code> от одного <code>AbortController</code>. При необходимости можно отписать все обработчики одним вызовом <code>ac.abort()</code>.</p>
+
+<hr>
+
+<h2 id="s7">7. Ключевые алгоритмы (кратко для ответа)</h2>
+
+<h3>7.1. Фильтрация и пагинация каталога</h3>
+<ol>
+  <li><code>getFilteredProducts()</code> — поиск + категория + стиль + сортировка.</li>
+  <li><code>getCatalogColumns()</code> — 3 / 2 / 1 колонка по ширине экрана (480 / 760 px).</li>
+  <li><code>slice</code> для текущей страницы; пустые placeholder-карточки выравнивают сетку.</li>
+</ol>
+
+<h3>7.2. Рекомендации «Сочетается с»</h3>
+<p>Для каждого кандидата считается <code>totalScore</code>: общие стили ×4, подходящая категория +3, близкая цена +1/+2, высокий рейтинг +1, штраф за ту же категорию −5. Берутся лучшие с score ≥ 5, желательно из разных категорий (до 4 штук).</p>
+
+<h3>7.3. Корзина</h3>
+<p>Массив <code>cart</code>: элементы <code>{ product, qty }</code>. Доставка бесплатна от 7000 ₽, иначе 490 ₽. Промокоды: <code>NOIR10</code> (10%), <code>STUDENT15</code> (15%). Состояние пишется в localStorage после каждого <code>renderCart()</code>.</p>
+
+<h3>7.4. CMS</h3>
+<p>Чтение/запись массива в <code>noir-products-v1</code>. ID генерируется по категории (<code>tshirt-6</code>, <code>pants-4</code>). Сброс — удаление ключа из localStorage, снова базовый каталог из data.js.</p>
+
+<hr>
+
+<h2 id="s8">8. Типичные вопросы на защите</h2>
+<ol>
+  <li><strong>Почему без backend?</strong> Учебный frontend; данные в localStorage и статические JSON-подобные структуры в JS.</li>
+  <li><strong>Чем отличается массив от объекта?</strong> Массив — список по индексам; объект — именованные поля (товар, настройки).</li>
+  <li><strong>Зачем data.js отдельно?</strong> Единый источник данных для витрины и админки.</li>
+  <li><strong>Как работает делегирование?</strong> Один listener на контейнере вместо сотен на каждой кнопке после render.</li>
+  <li><strong>Что такое CSS-переменные в карточке?</strong> --img-scale и --img-offset-y для подгонки фото товара.</li>
+  <li><strong>Адаптивность?</strong> Media queries 1150, 760, 480 px; Grid и clamp/minmax.</li>
+  <li><strong>Библиотеки?</strong> jQuery UI — autocomplete; Chart.js — диаграммы; CountUp — анимация цифр на «О проекте».</li>
+  <li><strong>SEO?</strong> meta title/description, robots.txt, sitemap.xml, семантика HTML5, alt у картинок.</li>
+  <li><strong>Валидация?</strong> HTML — validator.w3.org; CSS — jigsaw.w3.org; JS — JSHint + консоль браузера.</li>
+</ol>
+
+<div class="warn"><strong>Перед защитой:</strong> откройте сайт через Live Server, проверьте каталог, корзину, промокод NOIR10, «Сочетается с», CMS (добавить/удалить товар), страницу «О проекте» с графиками. Консоль (F12) должна быть без красных ошибок.</div>
+
+<p style="margin-top:2em;font-size:9pt;color:#666;">Документ сгенерирован для проекта Phoneutria nigriventer. Актуальные номера строк см. в исходниках репозитория.</p>
+
+</body>
+</html>
