@@ -159,7 +159,7 @@ function fillSelects() {
         .join("")}`;
 }
 
-// Перерисовывает быстрые чипы стилей под текущее значение фильтра.
+// Перерисовывает быстрык кнопки стилей под текущее значение фильтра.
 function renderStyleNav() {
     styleNav.innerHTML = [
         `<button class="style-chip ${styleSelect.value === "all" ? "active" : ""}" type="button" data-style="all">Все</button>`,
@@ -259,7 +259,7 @@ function getCatalogColumns() {
     return 3;
 }
 
-// Рисует контролы пагинации для каталога.
+// Рисует пагинации для каталога.
 function renderPagination(totalPages) {
     if (!paginationControls) return;
     if (totalPages <= 1) {
@@ -587,9 +587,12 @@ function initMetrics() {
 function initAutocomplete() {
     if (!window.jQuery || !window.jQuery.ui || !searchInput) return;
     const source = products.map((item) => item.name);
+    const appendTarget = searchInput.closest(".control-group") || searchInput.parentElement;
     $(searchInput).autocomplete({
         source,
         minLength: 1,
+        appendTo: appendTarget,
+        position: { my: "left top", at: "left bottom", collision: "none" },
         select: function (_, ui) {
             searchInput.value = ui.item.value;
             renderCatalog();
@@ -714,7 +717,7 @@ function updateQty(productId, delta) {
     renderCart();
 }
 
-// --- Обработчики UI (разные современные приёмы в bindEvents): именованные функции,
+// --- Обработчики UI : именованные функции,
 // делегирование с event.target.closest(), AbortController + { signal }, фаза capture для одного сценария.
 
 function onFilterChanged() {
@@ -722,7 +725,7 @@ function onFilterChanged() {
     renderCatalog();
 }
 
-/** Делегирование: клик по чипу стиля (всплытие), ищем ближайшую кнопку с data-style. */
+/** Делегирование: клик по кнопке стиля (всплытие), ищем ближайшую кнопку с data-style. */
 function handleStyleNavClick(event) {
     const chip = event.target instanceof Element ? event.target.closest("button[data-style]") : null;
     if (!chip || !styleNav.contains(chip)) return;
